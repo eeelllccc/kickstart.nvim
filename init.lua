@@ -128,6 +128,26 @@ do
   --  Schedule the setting after `UiEnter` because it can increase startup-time.
   --  Remove this option if you want your OS clipboard to remain independent.
   --  See `:help 'clipboard'`
+  if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
+    -- Send yanks to the local terminal over SSH. Keep pastes cached rather
+    -- than querying terminals that may refuse clipboard reads and time out.
+    local cached = { ['+'] = { {}, 'v' }, ['*'] = { {}, 'v' } }
+    local function copy(register)
+      local send = require('vim.ui.clipboard.osc52').copy(register)
+      return function(lines, regtype)
+        cached[register] = { vim.deepcopy(lines), regtype }
+        send(lines)
+      end
+    end
+    vim.g.clipboard = {
+      name = 'SSH terminal (OSC 52)',
+      copy = { ['+'] = copy '+', ['*'] = copy '*' },
+      paste = {
+        ['+'] = function() return cached['+'] end,
+        ['*'] = function() return cached['*'] end,
+      },
+    }
+  end
   vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
   -- Enable break indent

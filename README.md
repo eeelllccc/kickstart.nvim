@@ -20,6 +20,10 @@ Rust projects also need a Rust toolchain with rustfmt; LaTeX builds need a TeX
 installation providing latexmk. For OCaml, install ocamlformat in the project's
 opam environment and launch Neovim from that environment.
 
+SSH sessions send yanks to the local terminal clipboard using OSC 52. The local
+terminal must allow clipboard writes. Use the terminal's paste shortcut to paste
+text copied outside Neovim; `p` uses the most recent text copied within Neovim.
+
 Plugins are managed by Neovim's built-in `vim.pack`. Commit `nvim-pack-lock.json`
 after successful installation so other machines use the same plugin revisions.
 Update plugins with `:lua vim.pack.update()`, review the changes, then write the
