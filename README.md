@@ -3,7 +3,7 @@
 ## Personal configuration
 
 Requires Neovim 0.12 or newer. This fork keeps two-space indentation, the
-Tokyo Night Storm theme, the previous LSP shortcuts, notebook.nvim, and
+Tokyo Night Storm theme, the previous LSP shortcuts, and
 rustaceanvim (version 9). Python uses Pyright and Ruff, with Black for formatting;
 LaTeX uses texlab with the existing latexmk build settings. OCaml formatting
 uses ocamlformat through Conform rather than treating it as a language server.
@@ -11,7 +11,7 @@ uses ocamlformat through Conform rather than treating it as a language server.
 On Arch, install the dependencies below in addition to the upstream requirements:
 
 ```sh
-sudo pacman -S --needed nodejs npm python python-pip python-pynvim
+sudo pacman -S --needed nodejs npm python python-pip
 ```
 
 Open Neovim to install plugins, then run `:MasonToolsInstallSync` to install the

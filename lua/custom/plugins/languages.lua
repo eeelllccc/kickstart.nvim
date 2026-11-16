@@ -11,6 +11,4 @@ vim.g.rustaceanvim = {
 }
 vim.pack.add {
   { src = 'https://github.com/mrcjkb/rustaceanvim', version = vim.version.range '^9' },
-  'https://github.com/meatballs/notebook.nvim',
 }
-require('notebook').setup()
